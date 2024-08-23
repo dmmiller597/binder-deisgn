@@ -25,16 +25,3 @@ Each participant may submit up to 10 unique designs adhering to the following cr
 2. Top 100 designs selected for experimental testing.
 3. Additional designs may be chosen based on novelty, creative design approach, or other noteworthy factors.
 4. The top 5 designers achieving the best binding affinity (lowest KD value) will receive awards.
-
-## To-Do List
-
-1. [ ] Review current literature on EGFR binding proteins and inhibitors
-2. [ ] Set up computational environment with necessary tools (e.g., AlphaFold2, RoseTTAFold)
-3. [ ] Develop initial protein design strategy
-4. [ ] Generate and optimize protein designs
-5. [ ] Perform in silico validation of designs (structure prediction, docking simulations)
-6. [ ] Analyze results and iterate on designs
-7. [ ] Select top designs for submission
-8. [ ] Prepare submission materials according to guidelines
-9. [ ] Submit designs before the deadline (TBA)
-10. [ ] Document design process for potential follow-up questions
