@@ -1,8 +1,4 @@
-# Protein Design Competition: EGFR Binding Protein
-
-## Overview
-
-This competition challenges protein designers to create a novel binding protein targeting the extracellular domain of EGFR (Epidermal Growth Factor Receptor), a significant cancer-associated drug target. The most promising designs will undergo experimental validation in our state-of-the-art automated wet lab, with all results being open-sourced to benefit the scientific community.
+# EGFR Binding Protein
 
 ## Target Specifications
 
@@ -10,9 +6,7 @@ This competition challenges protein designers to create a novel binding protein 
 - **Organism**: Human
 - **UniProt Accession ID**: P00533
 
-## Submission Guidelines
-
-Each participant may submit up to 10 unique designs adhering to the following criteria:
+## Guidelines
 
 1. Utilize only natural amino acids
 2. Maximum length of 200 amino acids
