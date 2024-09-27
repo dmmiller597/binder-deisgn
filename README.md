@@ -1,7 +1,11 @@
 # Install
 
+
+
+RFDiffusion
 ```
-git clone https://github.com/RosettaCommons/RFdiffusion
+git submodule add https://github.com/RosettaCommons/RFdiffusion path/to/submodule
+git submodule update --init --recursive
 ```
 
 
