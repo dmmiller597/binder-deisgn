@@ -1,3 +1,6 @@
 [submodule "modules/RFdiffusion"]
 	path = modules/RFdiffusion
 	url = https://github.com/RosettaCommons/RFdiffusion
+[submodule "modules/LigandMPNN"]
+	path = modules/LigandMPNN
+	url = https://github.com/dauparas/LigandMPNN
