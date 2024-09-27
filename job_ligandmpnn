@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -l walltime=5:00:00
+#PBS -l select=1:ncpus=1:mem=80gb:ngpus=1:gpu_type=A100
+#PBS -q hx
+#PBS -N ligandmpnn
+
+export HYDRA_FULL_ERROR=1
+
+cd $PBS_O_WORKDIR
+cat $PBS_NODEFILE
+
+source activate bits-in-binder
+
+module load CUDA/11.8.0
+
+cd modules/LigandMPNN
+
+# --model_type "protein_mpnn" \
+
+python run.py \
+        --seed 111 \
+        --pdb_path "../../outputs/3pp4/_0.pdb" \
+        --out_folder "../../outputs/3pp4_ligandmpnn" \
+        --chains_to_design "A" \
+        --batch_size 10 \
+        --number_of_batches 5

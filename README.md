@@ -47,6 +47,15 @@ Should be installed.
 
 
 
+LigandMPNN
+```
+bash get_model_params_ligandmpnn.sh "./model_params"
+cd modules/LigandMPNN
+pip install -r <(sed 's/==.*//' requirements.txt)
+```
+
+
+
 
 
 
