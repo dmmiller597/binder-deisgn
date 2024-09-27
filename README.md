@@ -4,10 +4,9 @@
 
 RFDiffusion
 ```
-git submodule add https://github.com/RosettaCommons/RFdiffusion path/to/submodule
+git submodule add https://github.com/RosettaCommons/RFdiffusion ./modules/RFdiffusion/
 git submodule update --init --recursive
 ```
-
 
 
 
