@@ -1,20 +1,35 @@
+# Install
+
+```
+git clone https://github.com/RosettaCommons/RFdiffusion
+```
+
+
+
+
+
+
+
 # Resources for the BioML Challenge 2024: Bits to Binders
 
 ## Table of Contents
-1. [Protein Design](#protein-design)
-2. [Protein Structure Prediction](#protein-structure-prediction)
-3. [Inverse Folding](#inverse-folding)
-4. [Generative Models](#generative-models)
-5. [Language Models](#language-models)
-6. [Other Useful Tools](#other-useful-tools)
-7. [Relevant Literature](#relevant-literature)
-8. [Miscellaneous](#miscellaneous)
-9. [Biology](#biology)
-   - [CAR-T Literature](#car-t-literature)
-   - [CD20 Literature](#cd20-literature)
-10. [Compute Resources](#compute-resources)
+- [Install](#install)
+- [Resources for the BioML Challenge 2024: Bits to Binders](#resources-for-the-bioml-challenge-2024-bits-to-binders)
+  - [Table of Contents](#table-of-contents)
+  - [Protein Design](#protein-design)
+  - [Protein Structure Prediction](#protein-structure-prediction)
+  - [Inverse Folding](#inverse-folding)
+  - [Generative Models](#generative-models)
+  - [Language Models](#language-models)
+  - [Other Useful Tools](#other-useful-tools)
+  - [Relevant Literature](#relevant-literature)
+  - [Miscellaneous](#miscellaneous)
+  - [Biology](#biology)
+    - [CAR-T Literature](#car-t-literature)
+    - [CD20 Literature](#cd20-literature)
+  - [Compute Resources](#compute-resources)
     - [TACC](#tacc)
-    - [Other](#other)
+    - [Other Compute](#other-compute)
 
 ## Protein Design
 Here is a compilation of many tools used by the UT Austin BioML Society. This is not a comprehensive list so we are likely missing some great tools. For a comprehensive list, check out [this great repository](https://github.com/yangkky/Machine-learning-for-proteins)!
