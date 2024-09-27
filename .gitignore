@@ -1,0 +1,8 @@
+
+outputs/
+test_outputs/
+
+# Jakub
+job_hx1
+rfdiffusion.e*
+rfdiffusion.o*
