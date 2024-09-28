@@ -54,7 +54,22 @@ cd modules/LigandMPNN
 pip install -r <(sed 's/==.*//' requirements.txt)
 ```
 
+For ESMFold, I am using an environment built for our other pipeline with Stefano. Can provide details later, but it's a bit messy as the `transformers` package has some weird error.
 
+
+
+
+# Current Protocol
+
+1. Use RFdiffusion on the epitopes to generate X backbones.
+2. Use ProteinMPNN to generate Y sequences to fold in X backbones (in total having X * Y designs)
+3. Validate by co-folding with ESMFold ???
+  - it takes about 14 seconds to fold the CD20 dimer + the binder
+4. Surrogate modeling of protein-protein interactions to validate?? Also, maybe optimise for something else here?
+5. Full-scale MD? (entire CAR-T complex? + CD20 + membrane)
+
+
+For the scripts that I use, look into the `job_` files.
 
 
 

@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS -l walltime=5:00:00
+#PBS -l select=1:ncpus=1:mem=80gb:ngpus=1:gpu_type=A100
+#PBS -q hx
+#PBS -N alphafold2
+
+
+cd $PBS_O_WORKDIR
+cat $PBS_NODEFILE
+
+# source activate bits-in-binder
+
+# module load CUDA/11
+
+source activate af2
+
+colabfold_batch data/input_sequence.fasta outputs/alphafold2 
+
+#    --model_type alphafold2_multimer_v3 --msa-mode single_sequence
+
