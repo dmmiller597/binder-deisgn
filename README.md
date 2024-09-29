@@ -57,6 +57,13 @@ pip install -r <(sed 's/==.*//' requirements.txt)
 For ESMFold, I am using an environment built for our other pipeline with Stefano. Can provide details later, but it's a bit messy as the `transformers` package has some weird error.
 
 
+RossettaFold-All-Atom
+```
+module load CUDA/11.2
+mamba env create -f environment.yaml
+conda activate RFAA
+
+```
 
 
 # Current Protocol
@@ -72,6 +79,8 @@ For ESMFold, I am using an environment built for our other pipeline with Stefano
 
 For the scripts that I use, look into the `job_` files.
 
+# CD20
+FMRESKTLGAVQIMNGLFHIALGGLLMIPAGIYAPICVTVWYPLWGGIMYIISGSLLAATEKNSRKCLVKGKMIMNSLSLFAAISGMILSIMDILNIKISHFLKMESLNFIRAHTPYINIYNCEPANPSEKNSPSTQYCYSIQSLFLGILSVMLIFAFFQELVIAGIVE
 
 
 # CAR-T construct

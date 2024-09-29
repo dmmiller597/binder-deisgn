@@ -2,8 +2,12 @@
 outputs/
 test_outputs/
 
-modules/*
 
 # Jakub
 rfdiffusion.e*
 rfdiffusion.o*
+
+checkpoint
+logger*
+*.dcd
+*.out

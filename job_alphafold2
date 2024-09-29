@@ -12,9 +12,13 @@ cat $PBS_NODEFILE
 
 # module load CUDA/11
 
-source activate af2
 
-colabfold_batch data/input_sequence.fasta outputs/alphafold2 
+
+# source activate af2
+
+module load AlphaFold/2.3.4-foss-2022a-CUDA-11.7.0-ColabFold
+
+colabfold_batch data/alphafold_sequence.fasta outputs/alphafold2 
 
 #    --model_type alphafold2_multimer_v3 --msa-mode single_sequence
 
