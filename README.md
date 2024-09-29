@@ -62,6 +62,7 @@ For ESMFold, I am using an environment built for our other pipeline with Stefano
 # Current Protocol
 
 1. Use RFdiffusion on the epitopes to generate X backbones.
+  - for the entire CD20 dimer, it takes about 2 minutes to generate a single backbone
 2. Use ProteinMPNN to generate Y sequences to fold in X backbones (in total having X * Y designs)
 3. Validate by co-folding with ESMFold ???
   - it takes about 14 seconds to fold the CD20 dimer + the binder
@@ -72,6 +73,23 @@ For ESMFold, I am using an environment built for our other pipeline with Stefano
 For the scripts that I use, look into the `job_` files.
 
 
+
+# CAR-T construct
+MALPVTALLLPLALLLHAARP<>GSTSGSGKPGSGEGSTKGLEPKSCDKTHTCPPCPDPKFWVLVVVGGVLACYSLLVTVAFIIFWVRSKRSRLLHSDYMNMTPRRPGPTRKHYQPYAPPRDFAAYRSRVKFSRSADAPAYKQGQNQLYNELNLGRREEYDVLDKRRGRDPEMGGKPRRKNPQEGLYNELQKDKMAEAYSEIGMKGERRRGKGHDGLYQGLSTATKDTYDALHMQALPPR
+ 
+CD8 leader – MALPVTALLLPLALLLHAARP
+ 
+<> – de novo binder
+ 
+218 linker – GSTSGSGKPGSGEGSTKG
+ 
+CD28 hinge – LEPKSCDKTHTCPPCPDPK
+ 
+CD28 transmembrane – FWVLVVVGGVLACYSLLVTVAFIIFWVR
+ 
+CD28 co-stim – SKRSRLLHSDYMNMTPRRPGPTRKHYQPYAPPRDFAAYRS
+ 
+CD3z stim – RVKFSRSADAPAYKQGQNQLYNELNLGRREEYDVLDKRRGRDPEMGGKPRRKNPQEGLYNELQKDKMAEAYSEIGMKGERRRGKGHDGLYQGLSTATKDTYDALHMQALPPR
 
 
 

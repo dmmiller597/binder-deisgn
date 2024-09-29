@@ -25,11 +25,14 @@ module load CUDA/11.8.0
 #     denoiser.noise_scale_frame=0
 
 
+# targetting both epitopes of the dimer
 python modules/RFdiffusion/scripts/run_inference.py \
-    inference.input_pdb=data/3pp4.pdb \
-    inference.output_prefix=outputs/3pp4/ \
-    'contigmap.contigs=[A1-24/0 80-80]' \
+    inference.input_pdb=data/6Y97_reindexed.pdb \
+    inference.output_prefix=outputs/6Y97/ \
+    'contigmap.contigs=[A1-169/0 B1-169/0 80-80]' \
+    'ppi.hotspot_res=[A127, A128, A129, A130, A131, A132, B127, B128, B129, B130, B131, B132]' \
     inference.num_designs=100 \
     denoiser.noise_scale_ca=0 \
-    denoiser.noise_scale_frame=0
+    denoiser.noise_scale_frame=0 \
+    inference.ckpt_override_path=models/
 
