@@ -94,9 +94,9 @@ def linker(pdb_path_1, pdb_path_2, design_name):
 
     # Add residues from binder_2 with a gap of 40
     last_resid = max(int(res.id[1]) for res in new_chain)
-    for residue in binder_2:
+    for i, residue in enumerate(list(binder_2)[::-1]):
         new_residue = residue.copy()
-        new_resid = int(residue.id[1]) + last_resid
+        new_resid = 1 + i + last_resid
         new_residue.id = (' ', new_resid, ' ')
         new_chain.add(new_residue)
 

@@ -32,7 +32,7 @@ curl -O http://files.ipd.uw.edu/pub/RFdiffusion/5532d2e1f3a4738decd58b19d633b3c3
 
 ```
 mamba install python=3.9
-mamba install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+mamba install pytorch pytorch-cuda=11.8 -c pytorch -c nvidia
 mamba install -c dglteam/label/th24_cu118 dgl
 mamba install pandas
 pip install hydra-core pyrsistent
