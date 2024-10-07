@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.esmfold import EsmFoldv1
 
 if __name__ == "__main__":
+    device = 'cuda'
+
     esmfold = EsmFoldv1()
     esmfold.load(
-        device="cpu",
+        device=device,
         memory_light=True,
     )
 
@@ -17,7 +19,7 @@ if __name__ == "__main__":
     CD20_B = "FMRESKTLGAVQIMNGLFHIALGGLLMIPAGIYAPICVTVWYPLWGGIMYIISGSLLAATEKNSRKCLVKGKMIMNSLSLFAAISGMILSIMDILNIKISHFLKMESLNFIRAHTPYINIYNCEPANPSEKNSPSTQYCYSIQSLFLGILSVMLIFAFFQELVIAGIVE"
     
 
-    with open("data/input_sequence.fasta", "r") as file:
+    with open("data/test.fasta", "r") as file:
         binder = file.readlines()[1].strip()
     
         # strip the last part of the sequence separated by :
@@ -49,6 +51,7 @@ if __name__ == "__main__":
         residue_indices=residue_indices,
         print_pdb=True,
         pdb_file="outputs/esmfold_output.pdb",
+        device=device,
     )
 
     print("Done")

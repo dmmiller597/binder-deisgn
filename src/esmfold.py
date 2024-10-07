@@ -130,12 +130,12 @@ class EsmFoldv1(FoldingCallback):
              residue_indices: List[int], 
              print_pdb : bool = True,
              pdb_file : str = "Prediction.pdb", 
-             my_device = "cuda:0",
+             device = "cuda:0",
              ) -> FoldingResult:
         assert self.model is not None, "Must call load() before fold()."
 
         with torch.no_grad():
-          device = torch.device( my_device )
+          device = torch.device(device)
 
           # Stefano Added comment:
           # the method to set residue_indices in Program makes them start from one, instead of zero.
