@@ -55,7 +55,46 @@ class EsmFoldv1(FoldingCallback):
         self.model = None
         self.i = 0
 
-    def load( self, device: str, memory_light = True, backend: str = None) -> None:
+
+    # def load(self, device: str, memory_light=True, backend: str=None, device_map: str="auto") -> None:
+    #     from accelerate import init_empty_weights, load_checkpoint_and_dispatch
+    #     self.tokenizer = AutoTokenizer.from_pretrained("facebook/esmfold_v1")
+
+    #     # Initialize an empty model
+    #     with init_empty_weights():
+    #         self.model = EsmForProteinFolding.from_pretrained("facebook/esmfold_v1")
+
+    #     if memory_light:
+    #         # Some optimizations to reduce memory usage
+    #         self.model.esm = self.model.esm.half()
+
+    #     # Define max_memory based on your available resources
+    #     max_memory = {0: "7GiB", 1: "7GiB", "cpu": "180GiB", "disk": "100GiB"}
+
+    #     # Load and dispatch the model
+    #     self.model = load_checkpoint_and_dispatch(
+    #         self.model, 
+    #         "facebook/esmfold_v1", 
+    #         device_map=device_map,
+    #         max_memory=max_memory,
+    #         no_split_module_classes=["EsmForProteinFolding"]
+    #     )
+
+    #     if backend is not None:
+    #         import time
+    #         t0 = time.time()
+    #         self.model = torch.compile(self.model, backend=backend)
+    #         t1 = time.time()
+    #         print(f"Time to compile model: {t1-t0} for backend {backend}")
+
+    #     self.model.eval()  # This sets the model in evaluation mode
+
+    #     # Check the total GPU memory allocated in bytes
+    #     allocated_memory_gib = torch.cuda.memory_allocated() / (1024 ** 3)
+    #     print(f"Total GPU memory allocated: {allocated_memory_gib:.2f} GiB")
+
+
+    def load(self, device: str, memory_light=True, backend: str=None, device_map: dict=None) -> None:
         """Load the correct model from pretrained one. if memory_light is True, then
         also uses an optimisation that makes the model potentially slower but
         uses less memory"""
@@ -75,9 +114,13 @@ class EsmFoldv1(FoldingCallback):
           #Some optimisations to reduce memory usage
           self.model.esm = self.model.esm.half()
 
-        self.model.to(device)
-        self.model.eval() #This sets the model in evaluation mode
-      
+        if device_map is not None:
+            self.model.parallelize(device_map)
+        else:
+            self.model.to(device)
+
+        self.model.eval()  # This sets the model in evaluation mode
+
         # Check the total GPU memory allocated in bytes
         allocated_memory_gib = torch.cuda.memory_allocated()/ (1024 ** 3)
         print(f"Total GPU memory allocated: {allocated_memory_gib:.2f} GiB")

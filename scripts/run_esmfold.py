@@ -5,27 +5,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.esmfold import EsmFoldv1
 
-# from Bio.PDB import PDBParser, PDBIO
-# from Bio.SeqUtils import seq1
-
-# # Parse the PDB file
-# parser = PDBParser()
-# structure = parser.get_structure('6Y97', '6Y97.pdb')
-
-# # Assert that there are two chains
-# assert len(list(structure.get_chains())) == 2, "There should be exactly two chains in the structure."
-
-# for chain in structure.get_chains():
-#     print(f">Chain {chain.id}")
-#     sequence = ""
-#     for residue in chain.get_residues():
-#         resname = residue.get_resname()
-#         sequence += seq1(resname)
-#     print(sequence)
-
 if __name__ == "__main__":
     esmfold = EsmFoldv1()
-    esmfold.load("cuda:0")
+    esmfold.load(
+        device="cpu",
+        memory_light=True,
+    )
 
     CD20_A = "FMRESKTLGAVQIMNGLFHIALGGLLMIPAGIYAPICVTVWYPLWGGIMYIISGSLLAATEKNSRKCLVKGKMIMNSLSLFAAISGMILSIMDILNIKISHFLKMESLNFIRAHTPYINIYNCEPANPSEKNSPSTQYCYSIQSLFLGILSVMLIFAFFQELVIAGIVE"
 

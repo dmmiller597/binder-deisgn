@@ -65,6 +65,22 @@ conda activate RFAA
 
 ```
 
+ESMFold
+```
+conda create -n esmfold
+conda activate esmfold
+mamba install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
+mamba install pytorch=2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install numpy scipy biotite einops modelcif omegaconf tree dm-tree
+pip install Bio ml_collections
+pip install transformers[torch]
+```
+Then need to edit the edit line:
+`with ContextManagers([] if False else [torch.no_grad()]):`
+on line 1956 in `transformers/src/transformers/models/esm/modeling_esmfold.py`
+
+in file `/home/jakub/anaconda3/envs/esm/lib/python3.12/site-packages/transformers/models/esm/modeling_esmfold.py`
+
 
 # Current Protocol
 
@@ -106,6 +122,9 @@ CD3z stim – RVKFSRSADAPAYKQGQNQLYNELNLGRREEYDVLDKRRGRDPEMGGKPRRKNPQEGLYNELQKDK
 
 ## Table of Contents
 - [Install](#install)
+- [Current Protocol](#current-protocol)
+- [CD20](#cd20)
+- [CAR-T construct](#car-t-construct)
 - [Resources for the BioML Challenge 2024: Bits to Binders](#resources-for-the-bioml-challenge-2024-bits-to-binders)
   - [Table of Contents](#table-of-contents)
   - [Protein Design](#protein-design)
