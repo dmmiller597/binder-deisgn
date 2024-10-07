@@ -48,13 +48,33 @@ module load CUDA/11.8.0
 #     denoiser.noise_scale_ca=0 \
 #     denoiser.noise_scale_frame=0
 
-
+echo "designing simple AA"
 
 # DESIGN OF LINKER BETWEEN AA, AB, and BB
 python modules/RFdiffusion/scripts/run_inference.py \
     inference.input_pdb=data/designs/simple/fixedAA.pdb \
     inference.output_prefix=outputs/simple/simpleAA/RFDiffusion/ \
     'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]' \
-    inference.num_designs=10 \
+    inference.num_designs=100 \
+    denoiser.noise_scale_ca=0 \
+    denoiser.noise_scale_frame=0
+
+echo "designing simple AB"
+
+python modules/RFdiffusion/scripts/run_inference.py \
+    inference.input_pdb=data/designs/simple/fixedAB.pdb \
+    inference.output_prefix=outputs/simple/simpleAB/RFDiffusion/ \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]' \
+    inference.num_designs=100 \
+    denoiser.noise_scale_ca=0 \
+    denoiser.noise_scale_frame=0
+
+echo "designing simple BB"
+
+python modules/RFdiffusion/scripts/run_inference.py \
+    inference.input_pdb=data/designs/simple/fixedBB.pdb \
+    inference.output_prefix=outputs/simple/simpleBB/RFDiffusion/ \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]' \
+    inference.num_designs=100 \
     denoiser.noise_scale_ca=0 \
     denoiser.noise_scale_frame=0
