@@ -27,15 +27,24 @@ def fixer(pdb_path, design_name):
 
     for model in structure:
         for chain in model:
-            # get residues 0 to first break
-            residues = [i for i in chain.get_residues()]
+            if 'simple' not in design_name:
+                # get residues 0 to first break
+                residues = [i for i in chain.get_residues()]
 
-            # first chain
-            chains['A'] = residues[0:indices_to_break[0]+1]
-            # second chain
-            chains['B'] = residues[indices_to_break[0]+1:indices_to_break[1]+1]
-            # third chain
-            chains['C'] = residues[indices_to_break[1]+1:]
+                # first chain
+                chains['A'] = residues[0:indices_to_break[0]+1]
+                # second chain
+                chains['B'] = residues[indices_to_break[0]+1:indices_to_break[1]+1]
+                # third chain
+                chains['C'] = residues[indices_to_break[1]+1:]
+            else:
+                # get residues 0 to first break
+                residues = [i for i in chain.get_residues()]
+                # first chain
+                chains['A'] = residues[0:indices_to_break[0]+1]
+                # second chain
+                chains['B'] = residues[indices_to_break[0]+1:]
+                
             
     # add these to a new structure
     for chain_id, residues in chains.items():
@@ -49,9 +58,17 @@ def fixer(pdb_path, design_name):
 
     io = PDBIO()
     io.set_structure(new_structure)
-    io.save(f'/home/jakub/phd/binder-design/data/designs/{design_name}/fixed.pdb')
+    if 'simple' in design_name:
+        if 'originalA' in pdb_path:
+            io.save(f'/home/jakub/phd/binder-design/data/designs/{design_name}/fixedA.pdb')
+        elif 'originalB' in pdb_path:
+            io.save(f'/home/jakub/phd/binder-design/data/designs/{design_name}/fixedB.pdb')
+    else:
+        io.save(f'/home/jakub/phd/binder-design/data/designs/{design_name}/fixed.pdb')
 
 
 if __name__ == "__main__":
     fixer("/home/jakub/phd/binder-design/data/designs/dimer1/original.pdb", 'dimer1')
     fixer("/home/jakub/phd/binder-design/data/designs/dimer5/original.pdb", 'dimer5')
+    fixer("/home/jakub/phd/binder-design/data/designs/simple/originalA.pdb", 'simple')
+    fixer("/home/jakub/phd/binder-design/data/designs/simple/originalB.pdb", 'simple')
