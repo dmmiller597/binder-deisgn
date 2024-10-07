@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "/gpfs/home/jl24018/projects/binder-design/modules/LigandMPNN/run.py", line 988, in <module>
+    main(args)
+  File "/gpfs/home/jl24018/projects/binder-design/modules/LigandMPNN/run.py", line 198, in main
+    protein_dict, backbone, other_atoms, icodes, _ = parse_PDB(
+                                                     ^^^^^^^^^^
+  File "/gpfs/home/jl24018/projects/binder-design/modules/LigandMPNN/data_utils.py", line 778, in parse_PDB
+    atoms = parsePDB(input_path)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/jl24018/mambaforge-pypy3/envs/ligandmpnn/lib/python3.11/site-packages/prody/proteins/pdbfile.py", line 124, in parsePDB
+    return _parsePDB(pdb[0], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/jl24018/mambaforge-pypy3/envs/ligandmpnn/lib/python3.11/site-packages/prody/proteins/pdbfile.py", line 206, in _parsePDB
+    pdb, chain = _getPDBid(pdb)
+                 ^^^^^^^^^^^^^^
+  File "/gpfs/home/jl24018/mambaforge-pypy3/envs/ligandmpnn/lib/python3.11/site-packages/prody/proteins/pdbfile.py", line 193, in _getPDBid
+    raise IOError('{0} is not a valid filename or a valid PDB '
+OSError: ../../data/stefano/designs/dimer1/fixed.pdb is not a valid filename or a valid PDB identifier.
+Traceback (most recent call last):
+  File "/gpfs/home/jl24018/projects/binder-design/modules/LigandMPNN/run.py", line 988, in <module>
+    main(args)
+  File "/gpfs/home/jl24018/projects/binder-design/modules/LigandMPNN/run.py", line 198, in main
+    protein_dict, backbone, other_atoms, icodes, _ = parse_PDB(
+                                                     ^^^^^^^^^^
+  File "/gpfs/home/jl24018/projects/binder-design/modules/LigandMPNN/data_utils.py", line 778, in parse_PDB
+    atoms = parsePDB(input_path)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/jl24018/mambaforge-pypy3/envs/ligandmpnn/lib/python3.11/site-packages/prody/proteins/pdbfile.py", line 124, in parsePDB
+    return _parsePDB(pdb[0], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home/jl24018/mambaforge-pypy3/envs/ligandmpnn/lib/python3.11/site-packages/prody/proteins/pdbfile.py", line 206, in _parsePDB
+    pdb, chain = _getPDBid(pdb)
+                 ^^^^^^^^^^^^^^
+  File "/gpfs/home/jl24018/mambaforge-pypy3/envs/ligandmpnn/lib/python3.11/site-packages/prody/proteins/pdbfile.py", line 193, in _getPDBid
+    raise IOError('{0} is not a valid filename or a valid PDB '
+OSError: ../../data/stefano/designs/dimer5/fixed.pdb is not a valid filename or a valid PDB identifier.
