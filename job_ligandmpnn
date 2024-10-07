@@ -9,18 +9,32 @@ export HYDRA_FULL_ERROR=1
 cd $PBS_O_WORKDIR
 cat $PBS_NODEFILE
 
-source activate bits-in-binder
+source activate ligandmpnn
 
-module load CUDA/11.8.0
+module load CUDA/12.1.0
 
 cd modules/LigandMPNN
 
-# --model_type "protein_mpnn" \
+python run.py \
+        --model_type "soluble_mpnn" \
+        --seed 111 \
+        --pdb_path "../../data/designs/dimer1/fixed.pdb" \
+        --out_folder "../../outputs/dimer1/SolubleMPNN" \
+        --chains_to_design "C" \
+        --batch_size 10 \
+        --number_of_batches 100
+
+# print that you finished with dimer1
+echo "Finished with dimer1"
 
 python run.py \
+        --model_type "soluble_mpnn" \
         --seed 111 \
-        --pdb_path "../../outputs/3pp4/_0.pdb" \
-        --out_folder "../../outputs/3pp4_ligandmpnn" \
-        --chains_to_design "A" \
+        --pdb_path "../../data/designs/dimer5/fixed.pdb" \
+        --out_folder "../../outputs/dimer5/SolubleMPNN" \
+        --chains_to_design "C" \
         --batch_size 10 \
-        --number_of_batches 5
+        --number_of_batches 100
+
+# print that you finished with dimer5
+echo "Finished with dimer5"
