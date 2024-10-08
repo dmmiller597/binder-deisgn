@@ -1,24 +1,16 @@
 # Install
 
-
-
-RFDiffusion
-```
-git submodule add https://github.com/RosettaCommons/RFdiffusion ./modules/RFdiffusion/
-```
-
-Install all submodules
+### Install all submodules
 ```
 git submodule update --init --recursive
 ```
-
 
 ```
 conda create -n bits-in-binder
 conda activate bits-in-binder
 ```
 
-RFDiffusion
+### RFDiffusion
 ```
 cd modules/RFdiffusion && mkdir models && cd models
 curl -O http://files.ipd.uw.edu/pub/RFdiffusion/6f5902ac237024bdd0c176cb93063dc4/Base_ckpt.pt
@@ -31,6 +23,8 @@ curl -O http://files.ipd.uw.edu/pub/RFdiffusion/5532d2e1f3a4738decd58b19d633b3c3
 ```
 
 ```
+conda create -n rfdiffusion
+conda activate rfdiffusion
 mamba install python=3.9
 mamba install pytorch pytorch-cuda=11.8 -c pytorch -c nvidia
 mamba install -c dglteam/label/th24_cu118 dgl
@@ -43,21 +37,21 @@ python setup.py install
 cd ../.. # change into the root directory of the repository
 pip install -e . # install the rfdiffusion module from the root of the repository
 ```
-Should be installed.
 
 
 
-LigandMPNN
+### LigandMPNN
 ```
 bash get_model_params_ligandmpnn.sh "./model_params"
 cd modules/LigandMPNN
+conda create -n ligandmpnn
+conda activate ligandmpnn python=3.11
 pip install -r <(sed 's/==.*//' requirements.txt)
 ```
 
-For ESMFold, I am using an environment built for our other pipeline with Stefano. Can provide details later, but it's a bit messy as the `transformers` package has some weird error.
 
-
-RossettaFold-All-Atom
+### RossettaFold-All-Atom
+Haven't used this in the end at all.
 ```
 module load CUDA/11.2
 mamba env create -f environment.yaml
@@ -65,7 +59,9 @@ conda activate RFAA
 
 ```
 
-ESMFold
+
+
+### ESMFold
 ```
 conda create -n esmfold
 conda activate esmfold
@@ -79,18 +75,21 @@ Then need to edit the edit line:
 `with ContextManagers([] if False else [torch.no_grad()]):`
 on line 1956 in `transformers/src/transformers/models/esm/modeling_esmfold.py`
 
-in file `/home/jakub/anaconda3/envs/esm/lib/python3.12/site-packages/transformers/models/esm/modeling_esmfold.py`
+In file `/home/jakub/anaconda3/envs/esm/lib/python3.12/site-packages/transformers/models/esm/modeling_esmfold.py`
 
 
 # Current Protocol
+### Dimer
+1. Take the best ESMFold MC optimization dimer design.
+2. Inverse fold it with SolubleMPNN.
+3. Sort by `ligandmpnn_confidence` score from SolMPNN.
 
-1. Use RFdiffusion on the epitopes to generate X backbones.
-  - for the entire CD20 dimer, it takes about 2 minutes to generate a single backbone
-2. Use ProteinMPNN to generate Y sequences to fold in X backbones (in total having X * Y designs)
-3. Validate by co-folding with ESMFold ???
-  - it takes about 14 seconds to fold the CD20 dimer + the binder
-4. Surrogate modeling of protein-protein interactions to validate?? Also, maybe optimise for something else here?
-5. Full-scale MD? (entire CAR-T complex? + CD20 + membrane)
+
+### Simple
+1. Take the best two single (simple) 20-residue designs focusing on the epitope (A and B).
+2. Design the backbone of the linker (40 residues) in between for AA, AB and BB combinations.
+3. Inpaint / inverse design this linker with SolubleMPNN.
+4. Sort by `ligandmpnn_confidence` score from SolMPNN.
 
 
 For the scripts that I use, look into the `job_` files.
@@ -117,12 +116,18 @@ CD28 co-stim – SKRSRLLHSDYMNMTPRRPGPTRKHYQPYAPPRDFAAYRS
 CD3z stim – RVKFSRSADAPAYKQGQNQLYNELNLGRREEYDVLDKRRGRDPEMGGKPRRKNPQEGLYNELQKDKMAEAYSEIGMKGERRRGKGHDGLYQGLSTATKDTYDALHMQALPPR
 
 
-
 # Resources for the BioML Challenge 2024: Bits to Binders
 
 ## Table of Contents
 - [Install](#install)
+    - [Install all submodules](#install-all-submodules)
+    - [RFDiffusion](#rfdiffusion)
+    - [LigandMPNN](#ligandmpnn)
+    - [RossettaFold-All-Atom](#rossettafold-all-atom)
+    - [ESMFold](#esmfold)
 - [Current Protocol](#current-protocol)
+    - [Dimer](#dimer)
+    - [Simple](#simple)
 - [CD20](#cd20)
 - [CAR-T construct](#car-t-construct)
 - [Resources for the BioML Challenge 2024: Bits to Binders](#resources-for-the-bioml-challenge-2024-bits-to-binders)
