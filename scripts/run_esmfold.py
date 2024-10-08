@@ -35,17 +35,17 @@ if __name__ == "__main__":
             for i, sequence in enumerate(sequences):
                 print(f"Running sequence {i} / {len(sequences)}: {sequence}")
 
-                # split by :
-                sequences = [sequence.split(":")[0] for sequence in sequences]
-
-                # CD20_A = sequences[0]
-                # CD20_B = sequences[1]
-                binder = sequences[0]
-
                 CD20_A = "FMRESKTLGAVQIMNGLFHIALGGLLMIPAGIYAPICVTVWYPLWGGIMYIISGSLLAATEKNSRKCLVKGKMIMNSLSLFAAISGMILSIMDILNIKISHFLKMESLNFIRAHTPYINIYNCEPANPSEKNSPSTQYCYSIQSLFLGILSVMLIFAFFQELVIAGIVE"
 
                 CD20_B = "FMRESKTLGAVQIMNGLFHIALGGLLMIPAGIYAPICVTVWYPLWGGIMYIISGSLLAATEKNSRKCLVKGKMIMNSLSLFAAISGMILSIMDILNIKISHFLKMESLNFIRAHTPYINIYNCEPANPSEKNSPSTQYCYSIQSLFLGILSVMLIFAFFQELVIAGIVE"
                 
+                # remove CD20_A from sequence
+                sequence = sequence.replace(CD20_A, "")
+                # remove :
+                sequence = sequence.replace(":", "")
+
+                binder = sequence
+
 
                 # # with open("data/test.fasta", "r") as file:
                 # binder = 'FLIFLHHSNSYLYNDAYHNRMMQKPDDEREGDPEYALYAAQRNAHMGMMYWMYEWHNWLGFKATPNEYPGLTEVVPELTR'
