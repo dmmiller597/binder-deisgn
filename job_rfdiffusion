@@ -1,0 +1,80 @@
+#!/bin/bash
+#PBS -l walltime=5:00:00
+#PBS -l select=1:ncpus=1:mem=80gb:ngpus=1:gpu_type=A100
+#PBS -q hx
+#PBS -N rfdiffusion
+
+export HYDRA_FULL_ERROR=1
+
+cd $PBS_O_WORKDIR
+cat $PBS_NODEFILE
+
+source activate rfdiffusion
+
+module load CUDA/11.8.0
+
+# ppi.hotspot_res=[P173,A83,A91] \
+
+# for epitope
+# python modules/RFdiffusion/scripts/run_inference.py \
+#     inference.input_pdb=data/3pp4.pdb \
+#     inference.output_prefix=outputs/3pp4/ \
+#     'contigmap.contigs=[A1-24/0 80-80]' \
+#     inference.num_designs=100 \
+#     denoiser.noise_scale_ca=0 \
+#     denoiser.noise_scale_frame=0 \
+#     'ppi.hotspot_res=[A127, A128, A129, A130, A131, A132, B127, B128, B129, B130, B131, B132]'
+
+
+# targetting both epitopes of the dimer
+# python modules/RFdiffusion/scripts/run_inference.py \
+#     inference.input_pdb=data/6Y97_reindexed.pdb \
+#     inference.output_prefix=outputs/6Y97/ \
+#     'contigmap.contigs=[A1-169/0 B1-169/0 80-80]' \
+#     'ppi.hotspot_res=[A127, A128, A129, A130, A131, A132, B127, B128, B129, B130, B131, B132]' \
+#     inference.num_designs=100 \
+#     denoiser.noise_scale_ca=0 \
+#     denoiser.noise_scale_frame=0 \
+#     inference.ckpt_override_path=models/
+
+
+# # targetting both epitopes of the dimer
+# python modules/RFdiffusion/scripts/run_inference.py \
+#     inference.input_pdb=data/6Y97_epitopes_plus.pdb \
+#     inference.output_prefix=outputs/6Y97_epitopes_plus/ \
+#     'contigmap.contigs=[A1-33/0 B1-33/0 80-80]' \
+#     'ppi.hotspot_res=[A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, B10, B11, B12, B13, B14, B15, B16, B17, B18, B19, B20, B21]' \
+#     inference.num_designs=100 \
+#     denoiser.noise_scale_ca=0 \
+#     denoiser.noise_scale_frame=0
+
+echo "designing simple AA"
+
+# DESIGN OF LINKER BETWEEN AA, AB, and BB
+python modules/RFdiffusion/scripts/run_inference.py \
+    inference.input_pdb=data/designs/simple/fixedAA.pdb \
+    inference.output_prefix=outputs/simple/simpleAA/RFDiffusion/ \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/40-40/C61-80]' \
+    inference.num_designs=10 \
+    denoiser.noise_scale_ca=0 \
+    denoiser.noise_scale_frame=0
+
+echo "designing simple AB"
+
+python modules/RFdiffusion/scripts/run_inference.py \
+    inference.input_pdb=data/designs/simple/fixedAB.pdb \
+    inference.output_prefix=outputs/simple/simpleAB/RFDiffusion/ \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/40-40/C61-80]' \
+    inference.num_designs=10 \
+    denoiser.noise_scale_ca=0 \
+    denoiser.noise_scale_frame=0
+
+echo "designing simple BB"
+
+python modules/RFdiffusion/scripts/run_inference.py \
+    inference.input_pdb=data/designs/simple/fixedBB.pdb \
+    inference.output_prefix=outputs/simple/simpleBB/RFDiffusion/ \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/40-40/C61-80]' \
+    inference.num_designs=10 \
+    denoiser.noise_scale_ca=0 \
+    denoiser.noise_scale_frame=0

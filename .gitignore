@@ -1,0 +1,11 @@
+__pycache__
+tmp/
+
+# Jakub
+rfdiffusion.e*
+rfdiffusion.o*
+
+checkpoint
+logger*
+*.dcd
+*.out

@@ -1,0 +1,56 @@
+#!/bin/bash
+#PBS -l walltime=5:00:00
+#PBS -l select=1:ncpus=1:mem=80gb:ngpus=1:gpu_type=A100
+#PBS -q hx
+#PBS -N ligandmpnn
+
+export HYDRA_FULL_ERROR=1
+
+cd $PBS_O_WORKDIR
+cat $PBS_NODEFILE
+
+source activate ligandmpnn
+
+module load CUDA/12.1.0
+
+cd modules/LigandMPNN
+
+# python run.py \
+#         --model_type "soluble_mpnn" \
+#         --seed 111 \
+#         --pdb_path "../../data/designs/dimer1/fixed.pdb" \
+#         --out_folder "../../outputs/dimer1/SolubleMPNN" \
+#         --chains_to_design "C" \
+#         --batch_size 10 \
+#         --number_of_batches 100
+
+# # print that you finished with dimer1
+# echo "Finished with dimer1"
+
+# python run.py \
+#         --model_type "soluble_mpnn" \
+#         --seed 111 \
+#         --pdb_path "../../data/designs/dimer5/fixed.pdb" \
+#         --out_folder "../../outputs/dimer5/SolubleMPNN" \
+#         --chains_to_design "C" \
+#         --batch_size 10 \
+#         --number_of_batches 100
+
+# # print that you finished with dimer5
+# echo "Finished with dimer5"
+
+for type in simpleAA simpleBB simpleAB
+do
+    for i in {0..9}
+    do
+        python run.py \
+            --model_type "soluble_mpnn" \
+            --seed 111 \
+            --pdb_path "../../outputs/simple/${type}/RFDiffusion/_${i}.pdb" \
+            --out_folder "../../outputs/${type}/SolubleMPNN" \
+            --chains_to_design "A" \
+            --fixed_residues "A1 A2 A3 A4 A5 A6 A7 A8 A9 A10 A11 A12 A13 A14 A15 A16 A17 A18 A19 A20 A61 A62 A63 A64 A65 A66 A67 A68 A69 A70 A71 A72 A73 A74 A75 A76 A77 A78 A79 A80" \
+            --batch_size 10 \
+            --number_of_batches 5
+    done
+done

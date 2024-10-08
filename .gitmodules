@@ -1,0 +1,9 @@
+[submodule "modules/RFdiffusion"]
+	path = modules/RFdiffusion
+	url = https://github.com/RosettaCommons/RFdiffusion
+[submodule "modules/LigandMPNN"]
+	path = modules/LigandMPNN
+	url = https://github.com/dauparas/LigandMPNN
+[submodule "modules/RoseTTAFold-All-Atom"]
+	path = modules/RoseTTAFold-All-Atom
+	url = https://github.com/baker-laboratory/RoseTTAFold-All-Atom
