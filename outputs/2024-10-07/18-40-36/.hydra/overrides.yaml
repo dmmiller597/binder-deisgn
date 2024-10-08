@@ -1,6 +1,0 @@
-- inference.input_pdb=data/designs/simple/fixedAA.pdb
-- inference.output_prefix=outputs/simple/simpleAA/RFDiffusion/
-- contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]
-- inference.num_designs=100
-- denoiser.noise_scale_ca=0
-- denoiser.noise_scale_frame=0

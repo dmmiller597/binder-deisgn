@@ -9,7 +9,7 @@ export HYDRA_FULL_ERROR=1
 cd $PBS_O_WORKDIR
 cat $PBS_NODEFILE
 
-source activate bits-in-binder
+source activate rfdiffusion
 
 module load CUDA/11.8.0
 
@@ -54,8 +54,8 @@ echo "designing simple AA"
 python modules/RFdiffusion/scripts/run_inference.py \
     inference.input_pdb=data/designs/simple/fixedAA.pdb \
     inference.output_prefix=outputs/simple/simpleAA/RFDiffusion/ \
-    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]' \
-    inference.num_designs=100 \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/40-40/C61-80]' \
+    inference.num_designs=10 \
     denoiser.noise_scale_ca=0 \
     denoiser.noise_scale_frame=0
 
@@ -64,8 +64,8 @@ echo "designing simple AB"
 python modules/RFdiffusion/scripts/run_inference.py \
     inference.input_pdb=data/designs/simple/fixedAB.pdb \
     inference.output_prefix=outputs/simple/simpleAB/RFDiffusion/ \
-    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]' \
-    inference.num_designs=100 \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/40-40/C61-80]' \
+    inference.num_designs=10 \
     denoiser.noise_scale_ca=0 \
     denoiser.noise_scale_frame=0
 
@@ -74,7 +74,7 @@ echo "designing simple BB"
 python modules/RFdiffusion/scripts/run_inference.py \
     inference.input_pdb=data/designs/simple/fixedBB.pdb \
     inference.output_prefix=outputs/simple/simpleBB/RFDiffusion/ \
-    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/C21-60/C61-80]' \
-    inference.num_designs=100 \
+    'contigmap.contigs=[A1-169/0 B1-169/0 C1-20/40-40/C61-80]' \
+    inference.num_designs=10 \
     denoiser.noise_scale_ca=0 \
     denoiser.noise_scale_frame=0
